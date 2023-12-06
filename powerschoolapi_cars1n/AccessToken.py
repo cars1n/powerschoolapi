@@ -47,7 +47,3 @@ class AccessToken:
                 raise Exception(f"Failed to obtain access token. Status Code: {response.status_code}, Message: {response.text}")
 
         return self.token
-
-if __name__ == "__main__":
-    access_token = AccessToken().get_access_token()
-    print("Access Token:", access_token)

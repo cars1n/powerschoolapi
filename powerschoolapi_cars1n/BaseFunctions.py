@@ -1,8 +1,8 @@
-from DataAccess import StandardAccess
+from .DataAccess import StandardAccess
 import os
 from icecream import ic
 from dotenv import load_dotenv
-from AccessToken import AccessToken
+from .AccessToken import AccessToken
 
 # Load environment variables from .env file just once
 load_dotenv()

@@ -12,7 +12,7 @@ This Python package provides an easy-to-use interface for interacting with the P
 To install the PowerSchool API package, use pip:
 
 ```bash
-pip install powerschoolapi-cars1n
+pip install powerschool-api-cars1n
 ```
 
 ## Usage
@@ -20,18 +20,18 @@ pip install powerschoolapi-cars1n
 Here's a quick start on how to use the PowerSchool API package:
 
 ```bash
-from PowerSchoolAPI import PS
+from powerschoolapi_cars1n import PS
 
 # Initialize the PowerSchool API client
 ps = PS()
 
 # Get the count of students in a school
 student_count = ps.get_student_count("school_dcid")
-ic("Student Count:", student_count)
+print("Student Count:", student_count)
 
 # Get detailed information about a student
 student_info = ps.get_student("student_id")
-ic("Student Information:", student_info)
+print("Student Information:", student_info)
 
 ```
 
