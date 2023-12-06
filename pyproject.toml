@@ -12,6 +12,14 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+install_requires=[
+    'requests',
+    'python-dotenv',
+    'dotenv',
+    'urllib3',
+    'icecream'
+    # other dependencies
+],
 
 [project.urls]
 Homepage = "https://github.com/cars1n/powerschoolapi"
