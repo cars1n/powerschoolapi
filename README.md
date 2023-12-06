@@ -6,8 +6,6 @@ This Python package provides an easy-to-use interface for interacting with the P
 
 - Get student count for a specified school.
 - Retrieve detailed student information.
-- Fetch course counts.
-- [More features you might have...]
 
 ## Installation
 
