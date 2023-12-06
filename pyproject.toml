@@ -5,25 +5,26 @@ build-backend = "hatchling.build"
 [project]
 name = "powerschoolapi_cars1n"
 version = "1.0"
+dependencies = [
+    'requests',
+    'python-dotenv',
+    'dotenv',
+    'urllib3',
+    'icecream',
+]
+requires-python = ">=3.8"
 authors = [
   { name="Carson Williams", email="14williamsc@gmail.com" },
 ]
 description = "A small package to interact with powerschool's api"
 readme = "README.md"
-requires-python = ">=3.8"
+license = {file = "LICENSE"}
+keywords = ["powerschool", "api", "powerschoolapi", "powerschoolapi_cars1n"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-install_requires=[
-    'requests',
-    'python-dotenv',
-    'dotenv',
-    'urllib3',
-    'icecream'
-    # other dependencies
-],
 
 [project.urls]
 Homepage = "https://github.com/cars1n/powerschoolapi"
