@@ -63,3 +63,28 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any queries or issues, please open an issue on the GitHub repository or contact me via email at 14williamsc@gmail.com
+
+
+### Semi-working features
+If you have a powerschool plugin then the normal queries_root folder that is required can be taken into account when making calls to those user created endpoints.
+
+Here is how you would set it up.
+
+```bash
+    from AccessToken import AccessToken
+    import os
+# Create an AccessToken instance and get the access token
+    token_instance = AccessToken()
+    access_token = token_instance.get_access_token()
+
+    queries_root_path = os.path.join(os.getcwd(), "queries_root")
+
+    data_access = DataAccess(access_token, school_dcid="1234", base_url=base_url, queries_root_path=queries_root_path, xml_file_name="the file name that is in your queries root folder")
+# User created path com.organization.attendance_manager.attendance.get_schwifty
+    response = data_access.fetch_data("attendance.get_schwifty", params={
+                "date": "01/01/1999",
+                "schoolid": "1234",
+            }, method="POST")
+
+    ic(response)
+```
