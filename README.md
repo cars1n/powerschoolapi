@@ -41,8 +41,8 @@ ic("Student Information:", student_info)
 
 Before using the PowerSchool API, ensure that you have set up the necessary environment variables. Your .env file should look something like this.
 
-CLIENT_ID =
-CLIENT_SECRET =
+CLIENT_ID = ...
+CLIENT_SECRET = ...
 POWERSCHOOL_SERVER_URL = "https://powerschool.example.com:443"
 
 ## Contributing
