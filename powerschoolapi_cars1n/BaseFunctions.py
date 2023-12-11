@@ -41,12 +41,40 @@ class PS:
 
     def get_student(self, student_id):
         endpoint = f"ws/v1/student/{student_id}?expansions=school_enrollment"
-        response = self.standard_access.fetch_data(endpoint, headers=json_headers)
-        return response.get('student', {})
-
-    def get_student_mom(self, student_id):
-        endpoint = f"ws/v1/{student_id}/student/contact/mother"
         return self.standard_access.fetch_data(endpoint, headers=json_headers)
+    
+    #function specific to my school
+    def get_reenroll_parents(self, student_id):
+        endpoint = f"ws/v1/student/{student_id}?expansions=school_enrollment&extensions=u_re_enrollment_extension"
+        response = self.standard_access.fetch_data(endpoint, headers=json_headers)
+
+        # Extracting only the relevant fields
+        reenroll_info = response.get('student', {}).get('_extension_data', {}).get('_table_extension', {})
+        parent_fields = {
+            'father': ['father_gn', 'father_sn', 'father_email'],
+            'mother': ['mother_gn', 'mother_sn', 'mother_email']
+        }
+        parents_info = []
+
+        for parent_type, fields in parent_fields.items():
+            parent_info = {'id': 1 if parent_type == 'father' else 2}
+            for item in reenroll_info.get('_field', []):
+                if item.get('name') in fields:
+                    parent_info[item['name']] = item.get('value')
+            parents_info.append(parent_info)
+
+        return parents_info
+
+    
+    def get_reenroll_parents_test(self, student_id):
+        endpoint = f"ws/v1/student/{student_id}?expansions=school_enrollment&extensions=u_re_enrollment_extension"
+        return self.standard_access.fetch_data(endpoint, headers=json_headers)
+
+
+
+    #def get_student_mom(self, student_id):
+    #    endpoint = f"ws/v1/{student_id}/student/contact/mother"
+    #    return self.standard_access.fetch_data(endpoint, headers=json_headers)
 
     #def add_student(self, student_data):
     #    endpoint = "ws/v1/student"
@@ -93,6 +121,34 @@ class PS:
         return all_students
 
     #School info
+
+    def get_students_in_grade(self, school_id, grade, pagesize=100):
+        total_count = self.get_student_count(school_id)
+        total_pages = -(-total_count // pagesize)
+
+        students_by_grade = {}
+        for page in range(1, total_pages + 1):
+            endpoint = f"ws/v1/school/{school_id}/student?expansions=school_enrollment&q=school_enrollment.enroll_status_code==0"
+            params = {'page': page, 'pagesize': pagesize}
+            data = self.standard_access.fetch_data(endpoint, params=params, headers=json_headers)
+
+            for student in data['students']['student']:
+                student_grade = student['school_enrollment']['grade_level']
+                if student_grade not in students_by_grade:
+                    students_by_grade[student_grade] = []
+
+                # Extract only the required fields
+                student_info = {
+                    'id': student['id'],
+                    'first_name': student['name']['first_name'],
+                    'last_name': student['name']['last_name'],
+                    'grade_level': student_grade
+                }
+
+                students_by_grade[student_grade].append(student_info)
+
+        return students_by_grade.get(grade, [])
+
     def get_course_count(self, school_id):
         endpoint = f"ws/v1/school/{school_id}/course/count"
         response = self.standard_access.fetch_data(endpoint, headers=json_headers)
