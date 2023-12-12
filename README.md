@@ -12,7 +12,7 @@ This Python package provides an easy-to-use interface for interacting with the P
 To install the PowerSchool API package, use pip:
 
 ```bash
-pip install powerschool-api-cars1n
+pip install powerschoolapi-cars1n
 ```
 
 ## Usage
