@@ -30,7 +30,7 @@ student_count = ps.get_student_count("school_dcid")
 print("Student Count:", student_count)
 
 # Get detailed information about a student
-student_info = ps.get_student("student_id")
+student_info = ps.get_student("student_dcid")
 print("Student Information:", student_info)
 
 ```
